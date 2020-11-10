@@ -4,7 +4,7 @@ const Post = require('../model/Post')
 
 
 router.get('/posts', (req, res, next)=>{
-    res.send({type:'GET'})
+    Post.find({}).then(data => res.send(data))
 })
 
 router.post('/posts', (req, res, next)=>{
@@ -18,8 +18,8 @@ router.put('/posts/:id', (req, res, next)=>{
 })
 
 router.delete('/posts/:id', (req, res, next)=>{
-    res.send({type:'DELETE'})
+    Post.findByIdAndRemove({_id: req.params.id})
+    .then(data => res.send(data))
 })
-
 
 module.exports = router
